@@ -12,7 +12,7 @@ Go to [Github](https://github.com/takenet/blip-sdk-js) to see the source code an
 
 Create a empty Node.js project
 
-```
+```shell
 mkdir MyBot
 cd MyBot
 npm init

@@ -38,7 +38,7 @@ The complete path of a message from this external channel to the service bot is:
 
 >The main bot receives a message from a Messenger user.
 
-```
+```json
 {
     "id": "1",
     "from": "1654804277843415@messenger.gw.msging.net",

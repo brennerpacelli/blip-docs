@@ -31,7 +31,7 @@ The currently available templates are:
 
 The next step is to create the directory for your chatbot and create a new project from the template:
 
-```
+```shell
 mkdir MyBot
 cd MyBot
 dotnet new blip-console

@@ -20,7 +20,7 @@ dotnet new -i "Take.Blip.Client.Templates::*"
 
 > After installing the templates, just create a directory for your chatbot and create a new project using a template:
 
-```
+```shell
 mkdir MyBot
 cd MyBot
 dotnet new blip-console

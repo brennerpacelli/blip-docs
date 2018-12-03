@@ -10,14 +10,15 @@ Before using this extension, check if you have already properly set a customer s
 
 ### Create a ticket for an attendance
 
-Before start to attendance some user is necessary first open a ticket. 
+Before start to attendance some user is necessary first open a ticket.
 To open a ticket send a command with `SET` method to `postmaster@desk.msging.net` and URI `/tickets/{customerIdentity}`, where `customerIdentity` is the customer identity to be attended. Use the `resource` property to delivery a context for the ticket.
 
 ```
 POST https://msging.net/commands HTTP/1.1
 Content-Type: application/json
 Authorization: Key {YOUR_TOKEN}
-
+```
+```json
 {
   "id": "89e18743",
   "to": "postmaster@desk.msging.net",
@@ -33,7 +34,8 @@ Server responds with ticked created
 ```
 HTTP/1.1 200 OK
 Content-Type: application/json
-
+```
+```json
 {
     "type": "application/vnd.iris.ticket+json",
     "resource": {
@@ -65,7 +67,7 @@ Content-Type: application/json
 
 At first, the bot receives a message and decides if it must route the user to a human agent. Imagine for instance that the message **"Hello, I would like to talk to an attendant."** is enough to send the user to an agent.
 
-```
+```json
 {
     "id": "1",
     "from": "1654804277843415@messenger.gw.msging.net",
@@ -79,7 +81,7 @@ To foward a received message to an agent, send the message to **{encoded-user-no
 
 **{encoded-user-node}** is the ASCII-encoded messages' emmiter node.
 
-```
+```json
 {
     "id": "1",
     "from": "bot@msging.net/instance",
@@ -95,7 +97,7 @@ To foward a received message to an agent, send the message to **{encoded-user-no
 
 First, the bot receives a message as below:
 
-```
+```json
 {
     "id": "2",
     "from": "1654804277843415%40messenger.gw.msging.net@desk.msging.net",
@@ -107,7 +109,7 @@ First, the bot receives a message as below:
 
 To forward a received message to the specific final user, the bot must decode the received message node so it knows where to respond **{encoded-user-node}@desk.msging.net**:
 
-```
+```json
 {
     "id": "2",
     "from": "bot@msging.net/instance",
@@ -121,14 +123,14 @@ To forward a received message to the specific final user, the bot must decode th
 
 >When the human agent closes some attendance the bot receives a message with a *Redirect* content type. The Redirect's context property has a *Ticket* with information about the attendance. In order to get a closed attendance information, add a receiver to **application/vnd.lime.redirect+json** content type.
 
-```
+```json
 {
     "id": "1",
     "to": "54f1dd2e-42d2-43f2-9100-68fbbabb9c83@tunnel.msging.net",
     "type": "application/vnd.lime.redirect+json",
     "content": {
         "context": {
-            "type": ""type": "application/vnd.iris.ticket+json",
+            "type": "application/vnd.iris.ticket+json",
             "value": {
                 "id": "1654804277843415",
                 "sequentialId": 0,
@@ -136,11 +138,11 @@ To forward a received message to the specific final user, the bot must decode th
                 "customerIdentity": "1654804277843415@messenger.gw.msging.net",
                 "agentIdentity": "ravpacheco%40gmail.com@blip.ai",
                 "status": "ClosedAttendant",
-                "storageDate":"2018-03-20T20:41:54.330Z",
-                "externalId":"3cf18133-7b0f-47d2-8719-bbaec6ee14e4",
-                "rating":0,
-                "team":"Default",
-                "unreadMessages":0
+                "storageDate": "2018-03-20T20:41:54.330Z",
+                "externalId": "3cf18133-7b0f-47d2-8719-bbaec6ee14e4",
+                "rating": 0,
+                "team": "Default",
+                "unreadMessages": 0
             }
         }
     }
@@ -157,7 +159,8 @@ Sometimes may be interesting allow the users close the ticket when they want. To
 POST https://msging.net/commands HTTP/1.1
 Content-Type: application/json
 Authorization: Key {YOUR_TOKEN}
-
+```
+```json
 {
   "id": "fbfd62ac",
   "to": "postmaster@desk.msging.net",
@@ -174,7 +177,8 @@ Authorization: Key {YOUR_TOKEN}
 ```
 HTTP/1.1 200 OK
 Content-Type: application/json
-
+```
+```json
 Server responds with success.
 
 {
@@ -194,7 +198,8 @@ The proccess of close a ticket is the last thing to do during an attendance. If 
 POST https://msging.net/commands HTTP/1.1
 Content-Type: application/json
 Authorization: Key {YOUR_TOKEN}
-
+```
+```json
 {
   "id": "123219310318",
   "to": "postmaster@desk.msging.net",
@@ -259,7 +264,8 @@ To filter specific tickets you can use **$filter** parameter on query string wit
 POST https://msging.net/commands HTTP/1.1
 Content-Type: application/json
 Authorization: Key {YOUR_TOKEN}
-
+```
+```json
 {
   "id": "123219310318",
   "to": "postmaster@desk.msging.net",
@@ -273,7 +279,8 @@ Server responds with all tickets found.
 ```
 HTTP/1.1 200 OK
 Content-Type: application/json
-
+```
+```json
 {
     "type": "application/vnd.lime.collection+json",
     "resource": {
@@ -314,7 +321,8 @@ In order to get all attendants of some bot send a command with `GET` method to `
 POST https://msging.net/commands HTTP/1.1
 Content-Type: application/json
 Authorization: Key {YOUR_TOKEN}
-
+```
+```json
 {
   "id": "123219310318",
   "to": "postmaster@desk.msging.net",
@@ -328,7 +336,8 @@ Server responds with a list of attendants and status.
 ```
 HTTP/1.1 200 OK
 Content-Type: application/json
-
+```
+```json
 {
     "type": "application/vnd.lime.collection+json",
     "resource": {
